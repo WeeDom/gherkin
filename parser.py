@@ -13,10 +13,11 @@ try:
             res = p.parse(DATA_DIR + f)
             op.write("filename: {}\n\n".format(DATA_DIR + f))
             for ft in res['feature']['children']:
-                op.write("{}\t".format(ft['name']))
                 for t in ft['tags']:
-                    op.write("{}\t".format(t['name']))
-                op.write("\n")
+                    if t['name'].startswith("@business") or \
+                        t['name'].startswith("@ID"):
+                            op.write("{}\t".format(t['name']))
+                op.write("\t{}\n".format(ft['name']))
 
 except Exception as e:
     print(e)
